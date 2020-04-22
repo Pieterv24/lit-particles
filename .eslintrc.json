@@ -9,6 +9,6 @@
     ],
     "no-plusplus": "off",
     "no-else-return": ["error", {"allowElseIf": true}],
-    "class-methods-use-this": "warn"
+    "semi": "error"
   }
 }

@@ -8,13 +8,81 @@ npm i lit-particles-js
 ```
 
 ## Usage
+### in index.html
 ```html
-<script type="module">
-  import 'lit-particles-js/lit-particles-js.js';
-</script>
+  <lit-particles options='{
+    "maxParticles": 200,
+    <desired options>
+  }'></lit-particles>
 
-<lit-particles-js></lit-particles-js>
+  <script type="module">
+    import 'lit-particles/lit-particles.js';
+  </script>
 ```
+```
+NOTE: when using an attribute the value in options should be in proper json format
+```
+
+### in lit-elements component
+```js
+  import { html, LitElement } from 'lit-element';
+  import 'lit-particles/lit-particles.js';
+
+  const options = {
+    maxParticles: 200,
+    color: ["#FF0000", "#00FF00", "#0000FF"]
+  }
+
+  class ExampleComponent extends LitElement {
+    render() {
+      return html`
+        <lit-particles .options="${options}"></lit-particles>
+      `;
+    }
+  }
+```
+```
+NOTE: when passing an object directly into the options property a '.' should be appendend to the attribute.
+```
+
+### other frameworks
+Importing the following should register the custom component.
+```js
+import 'lit-particles/lit-particles.js;
+```
+Afterward, you should be able to use it by using the custom tags.
+```html
+<lit-particles></lit-paritcles>
+```
+The options can either be handled with the data-binding method of the framework or by using attributes.  
+For more information about properties and attributes read [this](https://lit-element.polymer-project.org/guide/properties).
+
+## Configuration
+```js
+const defaultOptions = {
+  // The amount of particles {Number}
+  maxParticles: 150,
+  // The size of the particles {Number}
+  size: 2,
+  // Whether to draw the particles on the canvas {Boolean}
+  showParticles: true,
+  // The speed with which the particles move {Number}
+  speed: 1,
+  // The color(s) of the particles {Array.<String>, String}
+  // This can either be a single color, or an array of colors
+  color: '#000000',
+  // The minimum distance particles should be from eachother before a line between them is created {Number}
+  minDistance: 120,
+  // Whether the particles will be connected with lines
+  connectParticles: true,
+};
+```
+
+## Local Demo with `es-dev-server`
+```bash
+npm start
+```
+To run a local development server that serves the basic demo located in `demo/index.html`
 
 ## Linting with ESLint, Prettier, and Types
 To scan the project for linting errors, run
@@ -42,39 +110,3 @@ npm run format:eslint
 ```bash
 npm run format:prettier
 ```
-
-## Testing with Karma
-To run the suite of karma tests, run
-```bash
-npm run test
-```
-
-To run the tests in watch mode (for <abbr title="test driven development">TDD</abbr>, for example), run
-
-```bash
-npm run test:watch
-```
-
-## Demoing with Storybook
-To run a local instance of Storybook for your component, run
-```bash
-npm run storybook
-```
-
-To build a production version of Storybook, run
-```bash
-npm run storybook:build
-```
-
-
-## Tooling configs
-
-For most of the tools, the configuration is in the `package.json` to reduce the amount of files in your project.
-
-If you customize the configuration a lot, you can consider moving them to individual files.
-
-## Local Demo with `es-dev-server`
-```bash
-npm start
-```
-To run a local development server that serves the basic demo located in `demo/index.html`

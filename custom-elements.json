@@ -2,31 +2,27 @@
   "version": 2,
   "tags": [
     {
-      "name": "lit-particles-js",
-      "description": "A component with a title and an action counter",
+      "name": "lit-particles",
+      "description": "A canvas with particles",
       "properties": [
         {
-          "name": "title",
-          "type": "String",
-          "description": "The title of your component",
-          "default": "Hey there"
-        },
-        {
-          "name": "counter",
-          "type": "Number",
-          "description": "An action counter",
-          "default": 0
+          "name": "options",
+          "type": "Object",
+          "description": "options to control particle generation",
+          "default": {
+            "maxParticles": 150,
+            "size": 2,
+            "showParticles": true,
+            "speed": 1,
+            "color": "#000000",
+            "minDistance": 120,
+            "connectParticles": true
+          }
         }
       ],
       "events": [],
       "slots": [],
-      "cssProperties": [
-        {
-          "name": "--lit-particles-js-text-color",
-          "description": "Main Text Color",
-          "type": "Color"
-        }
-      ]
+      "cssProperties": []
     }
   ]
 }

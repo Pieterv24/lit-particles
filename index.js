@@ -1,1 +1,1 @@
-export { LitParticlesJs } from './src/LitParticlesJs.js';
+export { LitParticles } from './src/LitParticles.js';

@@ -1,3 +1,5 @@
+import { selectRandomItem } from './utils/collections.js';
+
 export class Particle {
   /** @type {Number} */
   speed;
@@ -22,8 +24,7 @@ export class Particle {
    */
   constructor(canvas, options) {
     this.speed = options.speed;
-    this.color =
-      options.color instanceof Array ? this._selectRandomColor(options.color) : options.color;
+    this.color = options.color instanceof Array ? selectRandomItem(options.color) : options.color;
     this.context = canvas.getContext('2d');
 
     this.x = canvas.offsetParent
@@ -38,17 +39,6 @@ export class Particle {
     this.radius = options.size;
 
     this.draw();
-  }
-
-  /**
-   * Selects a random color from an array with colors
-   * @param {Array.<String>} colors
-   * @returns {String} color
-   * @static
-   * @private
-   */
-  static _selectRandomColor(colors) {
-    return colors[Math.floor(Math.random() * colors.length)];
   }
 
   /**

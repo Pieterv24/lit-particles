@@ -18,19 +18,18 @@
   </style>
 </head>
 <body>
-  <div id="demo"></div>
+  <lit-particles options='{
+    "maxParticles": 200,
+    "size": 2,
+    "showParticles": true,
+    "speed": 1,
+    "color": "#000000",
+    "minDistance": 120,
+    "connectParticles": true
+  }'></lit-particles>
 
   <script type="module">
-    import { html, render } from 'lit-html';
-    import '../lit-particles-js.js';
-
-    render(
-      html`
-        <lit-particles-js>
-        </lit-particles-js>
-      `,
-      document.querySelector('#demo')
-    );
+    import '../lit-particles.js';
   </script>
 </body>
 </html>

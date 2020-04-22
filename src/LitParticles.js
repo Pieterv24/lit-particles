@@ -2,32 +2,47 @@ import { LitElement, html } from 'lit-element';
 
 import { defaultOptions } from './ParticleOptions.js';
 import { Particle } from './Particle.js';
+import { particleCompareFunc } from './utils/collections.js';
+import { hex2rgb } from './utils/hex2rgb.js';
 
-export class LitParticlesJs extends LitElement {
+export class LitParticles extends LitElement {
   /** @type {Array.<Particle>} */
   storage;
-  /** @type {import('./ParticleOptions.js').ParticleOptions} */
-  options;
   /** @type {HTMLCanvasElement} */
   canvas;
   /** @type {CanvasRenderingContext2D} */
   context;
 
+  /** @type {import('./ParticleOptions.js').ParticleOptions} */
+  get options() {
+    return this._options;
+  }
+
+  /** @type {import('./ParticleOptions.js').ParticleOptions} */
+  set options(val) {
+    const newSettings = {
+      ...defaultOptions,
+      ...val,
+    };
+    this._options = newSettings;
+    this.requestUpdate('options', newSettings);
+  }
+
   static get properties() {
     return {
-      options: {
-        type: Object,
-      },
+      options: { type: Object },
     };
   }
 
   constructor() {
     super();
 
-    this.options = defaultOptions;
+    this._options = defaultOptions;
   }
 
-  firstUpdated() {
+  firstUpdated(changedProps) {
+    super.firstUpdated(changedProps);
+
     this._animate = this._animate.bind(this);
 
     this._initializeCanvas();
@@ -121,29 +136,9 @@ export class LitParticlesJs extends LitElement {
     }
 
     if (this.options.connectParticles) {
-      this.storage.sort(this._particleCompareFunc);
+      this.storage.sort(particleCompareFunc);
       this._updateEdges();
     }
-  }
-
-  /**
-   * sort particles based on how close they are together
-   * @param {Particle} p1
-   * @param {Particle} p2
-   * @private
-   */
-  _particleCompareFunc(p1, p2) {
-    if (p1.x < p2.x) {
-      return -1;
-    } else if (p1.x > p2.x) {
-      return 1;
-    } else if (p1.y < p2.y) {
-      return -1;
-    } else if (p1.y > p2.y) {
-      return 1;
-    }
-
-    return 0;
   }
 
   /**
@@ -185,8 +180,8 @@ export class LitParticlesJs extends LitElement {
   _drawEdge(p1, p2, opacity) {
     const gradient = this.context.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
 
-    const c1 = this._hex2rgb(p1.color);
-    const c2 = this._hex2rgb(p2.color);
+    const c1 = hex2rgb(p1.color);
+    const c2 = hex2rgb(p2.color);
 
     gradient.addColorStop(0, `rgba(${c1.r}, ${c1.g}, ${c1.b}, ${opacity})`);
     gradient.addColorStop(1, `rgba(${c2.r}, ${c2.g}, ${c2.b}, ${opacity})`);
@@ -198,22 +193,5 @@ export class LitParticlesJs extends LitElement {
     this.context.stroke();
     this.context.fill();
     this.context.closePath();
-  }
-
-  /**
-   * Get RGB value of a hex color
-   * @param {String} hex
-   * @private
-   */
-  _hex2rgb(hex) {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-
-    return result
-      ? {
-          r: parseInt(result[1], 16),
-          g: parseInt(result[2], 16),
-          b: parseInt(result[3], 16),
-        }
-      : null;
   }
 }
