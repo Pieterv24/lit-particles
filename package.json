@@ -1,7 +1,7 @@
 {
   "name": "lit-particles",
   "version": "0.0.1",
-  "description": "Webcomponent lit-particles-js following open-wc recommendations",
+  "description": "A webcomponent that creates a nice paritcle effect on a canvas",
   "author": "lit-particles-js",
   "license": "MIT",
   "main": "index.js",
