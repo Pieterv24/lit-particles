@@ -1,8 +1,13 @@
 {
   "name": "lit-particles",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A webcomponent that creates a nice paritcle effect on a canvas",
-  "author": "lit-particles-js",
+  "author": "Pieterv24",
+  "homepage": "https://github.com/Pieterv24/lit-particles",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pieterv24/lit-particles"
+  },
   "license": "MIT",
   "main": "index.js",
   "module": "index.js",
