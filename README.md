@@ -1,3 +1,4 @@
+[![npm version](https://badge.fury.io/js/lit-particles.svg)](https://badge.fury.io/js/lit-particles)
 # \<lit-particles>
 
 This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
