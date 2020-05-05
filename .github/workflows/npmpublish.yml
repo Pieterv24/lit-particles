@@ -45,8 +45,11 @@ jobs:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
       - run: npm config get registry
-      - run: npm ci
-      - run: npm run build
+      - run: cat /home/runner/work/_temp/.npmrc
+      - run: pwd
+      - run: ls -la
+#       - run: npm ci
+#       - run: npm run build
 #       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
