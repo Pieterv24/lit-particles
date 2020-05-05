@@ -44,6 +44,7 @@ jobs:
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
+          scope: '@pieterv24'
       - run: npm config get registry
       - run: cat /home/runner/work/_temp/.npmrc
       - run: pwd
